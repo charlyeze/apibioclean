@@ -1,10 +1,16 @@
 const express = require('express');
-// const helmet = require("helmet");
+const mongoose = require('mongoose');
 const app = express();
+
 const usuarioRouters = require('./api/routes/usuario');
 
+// Conexión base de datos
+const uri = 'mongodb://localhost:27017/bioclean';
+const options = {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true};
+
+mongoose.connect(uri, options).then( () => { console.log('Conectado a DB') }, err => { console.log(err) } );
+
 //middlewares
-// app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
