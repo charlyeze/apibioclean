@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 const usuarioRouters = require('./api/routes/usuario');
+const objetosRouters = require('./api/routes/objetos');
 
-// Conexión base de datos
 const uri = 'mongodb://localhost:27017/bioclean';
 const options = {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true};
 
@@ -27,5 +27,6 @@ app.all('*', function(req, res, next) {
 
 //Routers
 app.use('/Login', usuarioRouters); 
+app.use('/:objetos', objetosRouters);
 
 app.listen(3002);
