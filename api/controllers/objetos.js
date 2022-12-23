@@ -14,7 +14,7 @@ const Barreraluz4 = require('../models/barreraluz4');
 const Barreraluz5 = require('../models/barreraluz5');
 
 
-exports.objeto_post = (req, res, next) => {
+exports.objeto_post = (req, res) => {
 
   const Model = req.Model;
   var body = req.body;
