@@ -1,5 +1,8 @@
 const express = require('express');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
+const rfs = require("rotating-file-stream");
+
 const app = express();
 
 const usuarioRouters = require('./api/routes/usuario');
@@ -11,6 +14,19 @@ const options = {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopolog
 mongoose.connect(uri, options).then( () => { console.log('Conectado a DB') }, err => { console.log(err) } );
 
 //middlewares
+// MORGAN SETUP
+// create a log stream
+const rfsStream = rfs.createStream("log.txt", {
+  size: '10M', // rotate every 10 MegaBytes written
+  interval: '7d', // rotate daily
+  compress: 'gzip' // compress rotated files
+})
+
+// add log stream to morgan to save logs in file
+app.use(morgan("dev", {
+  stream: rfsStream
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
