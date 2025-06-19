@@ -25,7 +25,7 @@ exports.objeto_post = (req, res) => {
       return objetoBody;
     });
 
-    Model.insertMany(objeto)
+    Model.insertMany(objeto, { ordered: false })
     .then(result => {
       return res.status(200).send(result);
     })

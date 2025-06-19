@@ -81,6 +81,8 @@ properties.lng = {
 
 const schema = mongoose.Schema(properties);
 
+schema.index({ fecha: 1, id_cli: 1, n_bar: 1 }, { unique: true });
+
 schema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Barrera2', schema);
